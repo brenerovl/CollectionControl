@@ -1,5 +1,8 @@
 const axios = require('axios');
 const CollectPoint = require('../models/CollectPoint');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 module.exports = {
     async index(req, res) {
@@ -22,7 +25,7 @@ module.exports = {
         const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
             params:{
                 address: address,
-                key: 'AIzaSyDi5NeYIPi6Kox-bGb5_IXayW09amWVq1w',
+                key: process.env.API_KEY,
             }
 
         }).catch(function(err){
@@ -48,10 +51,13 @@ module.exports = {
         const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
             params:{
                 address: newInfo.address,
-                key: 'AIzaSyDi5NeYIPi6Kox-bGb5_IXayW09amWVq1w',
+                key: process.env.API_KEY,
             }
 
-        });
+        }).catch(function(err){
+            console.log(err);
+            return res.status(400).send('Something Broke!');
+        });;
 
         const { lat: latitude, lng: longitude } = response.data.results[0].geometry.location;
 
