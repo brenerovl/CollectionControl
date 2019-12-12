@@ -2,10 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const routes = require('./routes');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 
-mongoose.connect('mongodb+srv://collector:collector@cluster0-s8mzj.mongodb.net/collectcontrol?retryWrites=true&w=majority', {
+mongoose.connect(process.env.DATABASE_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,

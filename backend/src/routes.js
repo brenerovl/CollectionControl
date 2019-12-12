@@ -5,7 +5,7 @@ const routes = new express.Router();
 
 
 routes.get('/', (req, res) => {
-    return res.send(`Hello ${req.query.name}`);
+    return res.send(`Hello World!`);
 });
 
 routes.post('/pontos-coleta', CollectPointController.store);

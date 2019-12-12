@@ -1,0 +1,59 @@
+.list-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 30px 30px 0px 0px;
+    padding-top: 30px;
+}
+
+.list-container ul {
+    list-style: none;
+    height: 400px;
+    overflow-y: auto;
+    margin-bottom: 4px;
+    margin-top: 6px;
+    border: 1px solid #ddd;
+    background: #FFF;
+}
+
+.list-container ul li {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.list-container ul li p {
+    color: rgb(43, 46, 48);
+}
+
+.list-container form#search-point {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-container form#search-point input {
+    margin-top: 10px;
+    width: 70%;
+}
+
+.list-container form#search-point input[type=text] {
+    height: 38px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    padding: 0 20px;
+    font-size: 14px;
+}
+
+.list-container form#search-point button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: 0;
+    background: #08A045;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.list-container form#search-point button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}

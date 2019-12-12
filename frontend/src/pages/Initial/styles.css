@@ -1,0 +1,32 @@
+.initial-container {
+    width: 100%;
+    max-width: 580px;
+    margin: 10px auto 0;
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.initial-container button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: 0;
+    background: #08A045;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.initial-container button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.initial-container p {
+    padding: 10px;
+    align-self: center;
+    font-size: 25px;
+    color: rgb(135, 141, 145);
+}
