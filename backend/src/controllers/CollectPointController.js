@@ -86,4 +86,14 @@ module.exports = {
           return res.json(doc);
         });
     },
+
+    async show(req, res) {
+        var name = req.params.name;
+        await CollectPoint.find({ name: {$regex: name,$options:'i'} }, function(err, doc) {
+            if(err) return res.send(err);
+
+            return res.send(doc);
+        });
+
+    },
 };

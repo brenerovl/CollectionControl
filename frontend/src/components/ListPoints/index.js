@@ -2,73 +2,68 @@ import React, { useState, useEffect } from 'react';
 import { Form, Input } from '@rocketseat/unform';
 
 import './styles.css';
+import api from '../../services/api';
 import Modal from '../Modal/index';
 
 export default function ListPoints(){
-
+    const [points, setPoints] = useState([]);
     const [modalPoint, setModalPoint] = useState({});
+    const [pointSearch, setPointSearch] = useState('');
 
     useEffect(() => {
         fetchData();
     }, []);
 
     const fetchData = async () => {
-        /* var config = { headers: {'market': localStorage.getItem('user-id')} };
-
-        var response = await api.get('products', config);
-        setPoint(response.data); */
+        var response = await api.get('/pontos-coleta');
+        setPoints(response.data);
     }
 
-    const handleModal = async (id) => {
-        /* var response = await api.get(`products/${id}`);
-        setModalPoint(response.data); */
+    const handleModal = async (name) => {
+        var response = await api.get(`pontos-coleta/${name}`);
+
+        setModalPoint(response.data);
+        console.log(modalPoint);
 
         var modal = document.getElementById("myModal");
         modal.style.display = "block";
     }
 
+    async function handleSubmit(value){
+        var response;
+        setPointSearch(value);
+        if(value){
+            response = await api.get(`/pontos-coleta/${value}`);
+            setPoints(response.data);
+        }
+        else {
+                response = await api.get('/pontos-coleta');
+                setPoints(response.data);
+            }
+    }
+
     return(
         <div className="list-container">
-            <Modal value={modalPoint} update={fetchData}/>
-            <Form id="search-point">
+            <Form id="search-point" onSubmit={handleSubmit}>
                 <Input
                 type="text"
                 name="searchPoints"
                 placeholder="Digite o nome do Ponto de coleta"
+                value={pointSearch}
+                onChange={e => handleSubmit(e.target.value)}
                 />
-                <button>Pesquisar</button>
+                <button type="submit">Pesquisar</button>
             </Form>
+            <Modal value={modalPoint} update={fetchData}/>
             <ul>
-                <li onClick={() => handleModal('product._id')}>
-                    <p>Nome: Fulano</p>
-                    <p>Endereço: Lugar</p>
-                    <p>Latitude: x</p>
-                    <p>Longitude: y</p>
-                </li>
-                <li>
-                    <p>Nome: Fulano</p>
-                    <p>Endereço: Lugar</p>
-                    <p>Latitude: x</p>
-                    <p>Longitude: y</p>
-                </li>
-                <li>
-                    <p>Nome: Fulano</p>
-                    <p>Endereço: Lugar</p>
-                    <p>Latitude: x</p>
-                    <p>Longitude: y</p>
-                </li>
-                <li>
-                    <p>Nome: Fulano</p>
-                    <p>Endereço: Lugar</p>
-                    <p>Latitude: x</p>
-                    <p>Longitude: y</p>
-                </li>
-                <li>
-                    <p>Nome: Fulano</p>
-                    <p>Endereço: Lugar</p>
-                    <p>Latitude: x</p>
-                    <p>Longitude: y</p>
-                </li>
+                {points.map((point) =>
+                    <li key={point._id.toString()} onClick={() => handleModal(point.name)}>
+                        <p>Nome: {point.name}</p>
+                        <p>Endereço: {point.address}</p>
+                        <p>Latitude: {point.latitude}</p>
+                        <p>Longitude: {point.longitude}</p>
+                    </li>
+                )}
             </ul>
         </div>
     );

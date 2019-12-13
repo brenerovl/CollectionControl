@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-/* import api from '../../services/api'; */
+import api from '../../services/api';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
@@ -22,6 +22,7 @@ export default class Modal extends Component {
     };
 
     componentDidUpdate(prevProps){
+        console.log(prevProps);
         if (this.props.value !== prevProps.value) {
             this.setState({
                 name: this.props.value.name,
@@ -36,30 +37,42 @@ export default class Modal extends Component {
     }
 
     handleSubmit = async (values) => {
-        this.setState({ disableDeleteBtn: true, disableEditBtn: true });
-
-        /* await api.put('products', {
+        this.setState({ 
+            disableDeleteBtn: true, 
+            disableEditBtn: true 
+        });
+        await api.put('pontos-coleta', {
             _id: this.props.value._id,
             update: values
-        }); */
+        });
 
-        this.setState({ disableDeleteBtn: false });
+        this.setState({ 
+            disableDeleteBtn: false 
+        });
         this.handleModal();
         this.props.update();
     }
 
     handleDelete = async () => {
-        this.setState({ disableDeleteBtn: true, disableEditBtn: true });
+        this.setState({ 
+            disableDeleteBtn: true, 
+            disableEditBtn: true 
+        });
 
-        /* await api.delete(`products/${this.props.value._id}`); */
+        await api.delete(`pontos-coleta/${this.props.value.name}`);
 
-        this.setState({ disableDeleteBtn: false });
+        this.setState({ 
+            disableDeleteBtn: false 
+        });
         this.handleModal();
         this.props.update();
     }
 
     handleChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value, disableEditBtn: false });
+        this.setState({ 
+            [e.target.name]: e.target.value, 
+            disableEditBtn: false 
+        });
     }
 
     render() {
@@ -69,7 +82,7 @@ export default class Modal extends Component {
                     <div className="modal-header">
                         <span className="close" onClick={this.handleModal}>&times;</span>
                     </div>
-                    <Form onSubmit={this.handleSubmit} schema={schema}>
+                    <Form id="edit-point"  onSubmit={this.handleSubmit} schema={schema}>
                         <div className="modal-body">
                                 <label>Nome: </label>
                                 <Input

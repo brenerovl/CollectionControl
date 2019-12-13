@@ -10,6 +10,7 @@ routes.get('/', (req, res) => {
 
 routes.post('/pontos-coleta', CollectPointController.store);
 routes.get('/pontos-coleta', CollectPointController.index);
+routes.get('/pontos-coleta/:name', CollectPointController.show);
 routes.put('/pontos-coleta', CollectPointController.update);
 routes.delete('/pontos-coleta/:name', CollectPointController.delete);
 

@@ -29,7 +29,7 @@ class Register extends Component{
         const response = await api.post('/pontos-coleta',{
             name: values.name,
             address: values.address,
-        });
+        }).catch(err => console.log(err));
         console.log(response);
         resetForm();
         this.setState({
