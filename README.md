@@ -3,7 +3,7 @@
 
 ## Pré-requisitos
 
-Crie um arquivo .env na raiz do diretório back-end e defina as variáveis ​​de ambiente, como no arquivo .env.example.
+Crie um arquivo .env na raiz do diretório backend e defina as variáveis ​​de ambiente, como no arquivo .env.example.
 
 ## Instalação
 
