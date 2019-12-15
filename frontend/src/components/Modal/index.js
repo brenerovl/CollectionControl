@@ -7,9 +7,9 @@ import './styles.css';
 
 const schema = Yup.object().shape({
     name: Yup.string()
-      .required('Name is a required field'),
+      .required('Nome é um campo obrigatório'),
     price: Yup.string()
-      .required('Address is a required field'),
+      .required('Endereço é um campo obrigatório'),
   });
 
 export default class Modal extends Component {
@@ -22,7 +22,6 @@ export default class Modal extends Component {
     };
 
     componentDidUpdate(prevProps){
-        console.log(prevProps);
         if (this.props.value !== prevProps.value) {
             this.setState({
                 name: this.props.value.name,

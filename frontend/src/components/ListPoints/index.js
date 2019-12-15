@@ -16,6 +16,7 @@ export default function ListPoints(){
 
     const fetchData = async () => {
         var response = await api.get('/pontos-coleta');
+        console.log('Carregando pontos');
         setPoints(response.data);
     }
 
@@ -51,7 +52,6 @@ export default function ListPoints(){
                 value={pointSearch}
                 onChange={e => handleSearch(e.target.value)}
                 />
-                {/* <button type="submit">Pesquisar</button> */}
             </Form>
             <Modal value={modalPoint} update={fetchData}/>
             <ul>

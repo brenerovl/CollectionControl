@@ -7,9 +7,9 @@ import './styles.css'
 
 const schema = Yup.object().shape({
     name: Yup.string()
-      .required('Name is a required field'),
+      .required('Nome é um campo obrigatório'),
     address: Yup.string()
-      .required('Address is a required field'),
+      .required('Endereço é um campo obrigatório'),
   });
 
 class Register extends Component{

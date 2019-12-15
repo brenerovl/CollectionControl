@@ -37,10 +37,11 @@ module.exports = {
 
         if(response.data.status !== 'ZERO_RESULTS'){
             const { lat: latitude, lng: longitude } = response.data.results[0].geometry.location;
+            const formatted_address = response.data.results[0].formatted_address;
 
             collectPoint = await CollectPoint.create({
                 name,
-                address,
+                address: formatted_address,
                 latitude,
                 longitude,
             });
