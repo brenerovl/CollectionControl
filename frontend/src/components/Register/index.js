@@ -18,6 +18,7 @@ class Register extends Component{
         loading: false,
         name: '',
         address: '',
+        errorMessage: '',
     }
 
     handleSubmit = async (values, {resetForm}) => {
@@ -30,13 +31,26 @@ class Register extends Component{
             name: values.name,
             address: values.address,
         }).catch(err => console.log(err));
-        console.log(response);
-        resetForm();
-        this.setState({
-            loading: false,
-            name: '',
-            address: '',
-        });
+        if(response.data.name && response.data.address){
+            resetForm();
+            this.setState({
+                loading: false,
+                name: '',
+                address: '',
+                errorMessage: '',
+            });
+        }else if(!response.data.name){
+            this.setState({errorMessage: 'Nome inválido'});
+            this.setState({loading: false});
+        }else if (!response.data.address){
+            this.setState({
+                loading: false,
+                name: '',
+                address: '',
+                errorMessage: 'Endereço inválido',
+            });
+        }
+
     }
 
     render() {
@@ -55,7 +69,7 @@ class Register extends Component{
                         name="address"
                         placeholder="Endereço"
                     />
-        
+                    <p>{this.state.errorMessage}</p>
                     <button type="submit" disabled={this.state.loading}>Cadastrar</button>
                 </Form>
             </div>

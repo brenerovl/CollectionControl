@@ -19,7 +19,7 @@ module.exports = {
         const userExists = await CollectPoint.findOne({ name: name });
 
         if(userExists){
-            return res.json(userExists);
+            return res.json({name: false});
         }
 
         const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
@@ -33,16 +33,21 @@ module.exports = {
             return res.status(400).send('Something Broke!');
         });
 
-        const { lat: latitude, lng: longitude } = response.data.results[0].geometry.location;
+        var collectPoint;
 
-        const collectPoint = await CollectPoint.create({
-            name,
-            address,
-            latitude,
-            longitude,
-        });
+        if(response.data.status !== 'ZERO_RESULTS'){
+            const { lat: latitude, lng: longitude } = response.data.results[0].geometry.location;
 
-        return res.json(collectPoint);
+            collectPoint = await CollectPoint.create({
+                name,
+                address,
+                latitude,
+                longitude,
+            });
+            return res.json(collectPoint);
+
+        }else return res.json({name: true, address: false});
+
     },
 
     async update(req, res) {

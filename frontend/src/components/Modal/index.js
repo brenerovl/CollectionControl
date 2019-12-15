@@ -36,14 +36,17 @@ export default class Modal extends Component {
         modal.style.display = "none";
     }
 
-    handleSubmit = async (values) => {
+    handleSubmit = async () => {
         this.setState({ 
             disableDeleteBtn: true, 
             disableEditBtn: true 
         });
         await api.put('pontos-coleta', {
-            _id: this.props.value._id,
-            update: values
+            name: this.props.value.name,
+            newInfo: {
+                name: this.state.name,
+                address: this.state.address,
+            }
         });
 
         this.setState({ 
@@ -103,8 +106,8 @@ export default class Modal extends Component {
                                 />
                         </div>
                         <div className="modal-footer">
-                            <button id="editButton" type="submit" disabled={this.state.disableEditBtn}>Editar</button>
-                            <button onClick={this.handleDelete} id="deleteButton" type="submit" disabled={this.state.disableDeleteBtn}>Deletar</button>
+                            <button onClick={this.handleSubmit} id="editButton" type="submit" disabled={this.state.disableEditBtn}>Editar</button>
+                            <button onClick={this.handleDelete} id="deleteButton" type="button" disabled={this.state.disableDeleteBtn}>Deletar</button>
                         </div>
                     </Form>
                 </div>

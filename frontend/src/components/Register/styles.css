@@ -2,10 +2,13 @@
     width: 100%;
     max-width: 550px;
     height: 445px;
-    margin: 70px 70px 0px 70px;
+    margin-top: 70px;
     padding: 30px;
     background: #fff;
     border: 1px solid #ddd;
+}
+.register-container p {
+    color: red;
 }
 
 .register-container form#new-point {

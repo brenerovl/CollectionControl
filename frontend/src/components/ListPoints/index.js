@@ -22,14 +22,13 @@ export default function ListPoints(){
     const handleModal = async (name) => {
         var response = await api.get(`pontos-coleta/${name}`);
 
-        setModalPoint(response.data);
-        console.log(modalPoint);
+        setModalPoint(response.data[0]);
 
         var modal = document.getElementById("myModal");
         modal.style.display = "block";
     }
 
-    async function handleSubmit(value){
+    async function handleSearch(value){
         var response;
         setPointSearch(value);
         if(value){
@@ -44,15 +43,15 @@ export default function ListPoints(){
 
     return(
         <div className="list-container">
-            <Form id="search-point" onSubmit={handleSubmit}>
+            <Form id="search-point">
                 <Input
                 type="text"
                 name="searchPoints"
                 placeholder="Digite o nome do Ponto de coleta"
                 value={pointSearch}
-                onChange={e => handleSubmit(e.target.value)}
+                onChange={e => handleSearch(e.target.value)}
                 />
-                <button type="submit">Pesquisar</button>
+                {/* <button type="submit">Pesquisar</button> */}
             </Form>
             <Modal value={modalPoint} update={fetchData}/>
             <ul>
